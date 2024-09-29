@@ -7,12 +7,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TCPServer{
-        static DataInputStream[] din = new DataInputStream[2]; //make an array DataIn[] din = new DataIn
-        static DataOutputStream[] dout = new DataOutputStream[2]; //make an array DataOut[] dout = new DataIn
+        static DataInputStream[] din = new DataInputStream[2]; 
+        static DataOutputStream[] dout = new DataOutputStream[2]; 
         static Scanner userInput = new Scanner(System.in);
-        static Socket[] clientSocket = new Socket[2]; //make an array Socket[] clientSocket = new Socket[some num]
-        static ServerSocket serverSocket;
-        //static int messIndex = 0;
+        static Socket[] clientSocket = new Socket[2];
     
         public static int receiveNum(int clientNum){
             try {
@@ -29,8 +27,6 @@ public class TCPServer{
             try {
                 dout[clientNum].writeInt(numToSend);
                 dout[clientNum].flush();
-                //dout[messIndex].writeInt(numToSend);
-                //dout[messIndex].flush(); // By flushing the stream, it means to clear the stream of any element that may be or maybe not inside the stream
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
@@ -48,8 +44,6 @@ public class TCPServer{
                     
                 }
                 serverSocket.close();
-    
-                //System.out.println("Finished sending config to clients.");
                 System.exit(0);
     
             } catch (IOException e) {
@@ -57,7 +51,7 @@ public class TCPServer{
             }
         }
     
-    
+
         public static void main(String[] args){
             if(args.length != 3)
                 System.exit(1);     
@@ -67,24 +61,18 @@ public class TCPServer{
             Random random = new Random(seed);
             int randOne = random.nextInt();
             int randTwo = random.nextInt();
-            //if(port <= 1024 || port > 65535){ //need to catch error or something
-            //    System.exit(1);
-           // }
     
             try{
                 System.out.println("IP Address: " + InetAddress.getLocalHost() + "\nPort Number " + port);  
-                // Initialize Necessary Objects
-            
                 serverSocket = new ServerSocket(port);
-                //serverSocket = new ServerSocket(port);
                 System.out.println("waiting for client...");
-                clientSocket[0] = serverSocket.accept(); // Blocking call --> waits here until a request comes in from a client
-                dout[0] = new DataOutputStream(clientSocket[0].getOutputStream()); // Instantiates dout so we can then use it to send data to the client
-                din[0] = new DataInputStream(clientSocket[0].getInputStream()); // Instantiates din so we can then use it to receive data from the client
+                clientSocket[0] = serverSocket.accept(); 
+                dout[0] = new DataOutputStream(clientSocket[0].getOutputStream()); 
+                din[0] = new DataInputStream(clientSocket[0].getInputStream()); 
 
-                clientSocket[1] = serverSocket.accept(); // Blocking call --> waits here until a request comes in from a client
-                dout[1] = new DataOutputStream(clientSocket[1].getOutputStream()); // Instantiates dout so we can then use it to send data to the client
-                din[1] = new DataInputStream(clientSocket[1].getInputStream()); // Instantiates din so we can then use it to receive data from the client
+                clientSocket[1] = serverSocket.accept(); 
+                dout[1] = new DataOutputStream(clientSocket[1].getOutputStream()); 
+                din[1] = new DataInputStream(clientSocket[1].getInputStream()); 
                 
                 System.out.println("Clients Connected!");
                 System.out.println("Sending config to clients...");

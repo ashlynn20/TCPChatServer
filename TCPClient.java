@@ -14,27 +14,25 @@ public class TCPClient {
 
     public static int receiveNum(){
         try {
-            int response = din.readInt(); // Reads an int from the input stream 
+            int response = din.readInt();
             return response;
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        return -1; // if an incorrect value is read, the EXIT_NUM will be returned
+        return -1; 
     }
 
     public static void sendNumber(int numToSend){
         try {
-            dout.writeInt(numToSend); // Writes an int to the output stream
-            dout.flush(); // By flushing the stream, it means to clear the stream of any element that may be or maybe not inside the stream
+            dout.writeInt(numToSend); 
+            dout.flush(); 
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
     }
     
-    // Below method cleans up all of the connections by closing them and then exiting. 
-    // This prevents a lot of problems, so its good practice to always make sure the connections close. 
-
+   
     public static void cleanUp(){
         try {
             clientSocket.close();
@@ -58,13 +56,9 @@ public class TCPClient {
         final String server_ip = args[0]; 
 
         try{
-
-            // Initialize Necessary Objects
-            clientSocket = new Socket(server_ip, port); // Establishes a connection to the server
-            dout = new DataOutputStream(clientSocket.getOutputStream()); // Instantiates out so we can then use it to send data to the client
-            din = new DataInputStream(clientSocket.getInputStream()); // Instantiates in so we can then use it to receive data from the client
-            
-            // FIX ME: Create the while loop that sends and receives data
+            clientSocket = new Socket(server_ip, port); 
+            dout = new DataOutputStream(clientSocket.getOutputStream()); 
+            din = new DataInputStream(clientSocket.getInputStream()); 
             
             int secretMessagesCount = receiveNum();
             int randomNum = receiveNum();
