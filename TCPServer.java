@@ -1,5 +1,3 @@
-package cs280a1.hw3;
-
 import java.io.*;    
 import java.net.*;
 import java.io.IOException;
